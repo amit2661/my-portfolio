@@ -43,10 +43,10 @@
             -->
     
         <!-- <nav> (Navigation) is used to create a menu with links to other pages or external sites. -->
-        <Project data={p} hLevel="3" />
+        <!-- <Project data={p} hLevel="3" /> -->
    
-        <svelte:element this={"h" + hLevel}> Latest Projects  </svelte:element>
-
+        <!-- <svelte:element this={"h" + hLevel}> Latest Projects  </svelte:element> -->
+        <h2> Latest Projects</h2>
         <div class="projects">
                 {#each projects.slice(0, 3) as p}
                   <article>
