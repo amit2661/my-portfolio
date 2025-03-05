@@ -38,6 +38,8 @@
             -->
     
         <!-- <nav> (Navigation) is used to create a menu with links to other pages or external sites. -->
-        
+     
+        <Project data={project} />
+
         
     
