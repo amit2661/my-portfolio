@@ -1,11 +1,201 @@
 <script>
     export let data = {};
+    export let hLevel = 2;
 </script>
 
+<style>:root {
+    --accent-color: hsl(250, 100%, 34%); /* Primary accent color in OKLCH format */
+    --border-gray: oklch(80% 3% 200);
+     /* Gray for borders */
+    /* ADD the rest of the color definitions here if needed! */
+
+    color-scheme: dark;
+}
+
+.color-scheme {
+    position: absolute;
+    top: 1rem;    /* Adjusts distance from the top */
+    right: 1rem;  /* Adjusts distance from the right */
+    display: inline-flex;
+    gap: 5px;
+    font: 80%
+    /* padding: 5px 10px; */
+    /* border-radius: 5px; */
+    
+}
+/* STEP 1: Prevent content from getting too wide */
+
+/* 
+    Here we can define the base style for the body element. We already added this in Lab 1, but let's complete it!
+*/
+body {
+    font: 100%/1.5 system-ui; /* 100% font size, 1.5 line height, system font. Same as in lab 1 */
+    max-width: 100ch; /*Limits width to 50 rems for better readability */
+    margin-inline: auto;
+    writing-mode: horizontal-tb;/* Add here margin-inline */
+    padding: 2em/* Add here padding around the body */
+}
+
+
+/* STEP 2: Styling the navigation bar */
+
+/* 
+   Step 2.1: Getting <ul> and <li> out of the way
+   "display: contents" removes default styling while keeping semantic structure 
+   (you do not need to make any changes here for step 2.1, but please take note of it!)
+*/
+nav ul, 
+nav li {
+    display: contents;
+}
+
+/* Step 2.2: Apply Flexbox to the navigation */
+nav {
+    display: flex; /* Turns nav into a flex container */
+    --border-color: oklch(50% 10% 200 / 40%);
+    border-bottom: 1px solid var(--border-color); /* You will need to continue writing here for step 2.3 */
+}
+
+/* Step 2.3: Style navigation links for each element <a> */
+nav a {
+    flex: 1; /* step 2.2 for each element to take the same space  */
+    text-decoration: none; /* Remove the underline from the links by setting */
+    /* Add here color */
+    /* Add here text-align */
+    padding: 0.5em;/* Add here padding */
+    margin-top: 1em;/* Add here margin-bottom */
+}
+    /* NOTE: please make sure that in each index.html page you add class="current" to the current page*/
+        /* For example:  <a href="index.html" class="current">Home</a> */ 
+
+        nav a.current {
+            border-bottom: 4px solid oklch(80% 3% 200);
+            /* Add here what your current page should look like at the navigation bar (highlight)*/
+}
+
+/* Before jumping to the next step, remember to complete wtep 2.3 by editing 'nav' */
+
+/* 
+   Step 2.4: Accent color and hover styles
+*/
+nav a:hover {
+    border-bottom: 4px solid var(--accent-color);
+    background-color: color-mix(in oklch, var(--accent-color), canvas 85%); /* Add here hover effects */
+}
+
+
+/*  STEP 3: Contact form layout */
+
+/* Step 3.1: Integrate typography */
+    /* (you do not need to make any changes here for step 2.1, but please take note of it!) */
+select, input,
+textarea,
+button {
+    font: inherit; /* Ensures form elements use the same font as the body */
+}
+
+/* Step 3.2: Top-down layout */
+
+label, input, textarea, button { /* We define the elements in which we want this to take effect */
+    display: block;
+    /* add width here*/
+    /* add box-sizing here */
+}
+
+input, textarea, button { /* We define the elements in which we want this to take effect */
+    
+    box-sizing: border-box;
+    width: 100%;
+    border: solid #5B6DCD 1px;
+    padding: 5px;/* add width here*/
+    /* add box-sizing here */
+}
+
+label { /* We'll add the spacing between labels here */
+    margin-block: 0.5rem;
+}
+
+form { 
+    display: grid;
+    gap: 1em; /* Space between form elements */
+}
+
+.form-example {
+    display: grid;
+    grid-template-columns: auto 1fr; /* Label takes auto width, input takes remaining */
+    align-items: center; /* Aligns items in the same row */
+    gap: 0.5em; /* Adds a small space between label and input */
+}
+
+textarea {
+    width: 100%; /* Makes textarea align with inputs */
+}
+/* Step 3.2: Grid layout */
+ 
+    /* 
+        Please work on grid layout here.
+        NOTE: this will override what you did in the previous step! remember *Specificity*
+    */
+
+
+
+/* STEP 4: Style your projects page */
+.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    gap: 1em; /* Space between articles */
+}
+
+article {
+    display: grid;
+    grid-template-rows: subgrid; /* Aligns rows across articles */
+    grid-row: span 3; /* Each article spans 3 rows */
+    gap: 0.5em; /* Space between elements inside article */
+    padding: 1em;
+    border: 1px solid #ccc; /* Optional styling */
+    background: #f9f9f9; /* Light background for clarity */
+}
+
+h1 {
+    font-size: 400%; /* Makes h1 four times the body text size */
+    font-weight: bold; /* Ensures it stands out */
+    margin: 0.5em 0; /* Adds some spacing */
+}
+
+h2 {
+    margin: 0; /* Removes extra spacing */
+}
+
+img {
+    width: 100%; /* Makes images responsive */
+    height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.1; /* Tighter spacing for headings */
+    text-wrap: balance; /* Prevents uneven line breaks */
+    font-weight: bold; /* Ensures clear hierarchy */
+    margin: 0.5em 0; /* Consistent spacing */
+}
+
+
+
+/* STEP 5: Style your CV */
+
+    /* HINT: one thing you could do here is define an ID selector in your resume/index.html -> <section id="resume"> 
+             and then you can generate a layour just for your resume
+             For example:
+    */
+    #resume { /* Use this # as your ID selector */ 
+        max-width: 50rem;
+        /* ... */ 
+    }
+    </style>
+
 <article>
-    <h2>{p.title}</h2>
-    <img src="{p.image}" alt="" />
+    <h2>{data.title}</h2>
+    <img src="{data.image}" alt="" />
     <p>
-        {p.description}
+        {data.description}
     </p>
   </article>

@@ -1,3 +1,8 @@
+<script>
+    import projects from "$lib/projects.json";
+    import Project from "$lib/Project.svelte";
+</script>
+
 <!-- Start of "body" section  -->
 
     <!-- <nav> -->
@@ -38,8 +43,21 @@
             -->
     
         <!-- <nav> (Navigation) is used to create a menu with links to other pages or external sites. -->
-     
+        <Project data={p} hLevel="3" />
+   
+        <svelte:element this={"h" + hLevel}> Latest Projects  </svelte:element>
+
+        <div class="projects">
+                {#each projects.slice(0, 3) as p}
+                  <article>
+                    <Project data={p} />
         
+                    
+                  </article>
+                {/each}
+            </div>
+            
+            
 
         
     
