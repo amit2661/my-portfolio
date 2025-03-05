@@ -1,3 +1,6 @@
+<svelte:head>
+  <title>Resume</title>
+</svelte:head>
 <div class="container">
     <div class="header">
         <h1>Amit </h1>

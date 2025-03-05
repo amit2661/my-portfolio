@@ -24,11 +24,11 @@ function $$ (selector, context = document) {
 
 // step 3.1
 let pages = [
-	{url: "index.html", title: "Home"},
-	{url: "projects/index.html", title: "Projects"},
-	{url: "Resume/index.html", title: "Resume"},
-    {url: "contact/index.html", title: "Contacts"},
-    {url: "https://github.com/amit2661", title: "Github"},
+	{url: "./", title: "Home"},
+    {url: "/projects", title: "Projects"},
+	{url: "/Resume", title: "Resume"},
+    {url: "/contact", title: "Contact"},
+    {url: "https://github.com/amit2661", title: "Github"}
     // TODO: add the rest of your pages here
 ];
 
@@ -36,7 +36,7 @@ let nav = document.createElement("nav");
 document.body.prepend(nav);
 
 // TODO: Inside index.html (our home page), add a class="home" attribute to the <html lang="en"> element!
-const ARE_WE_HOME = document.documentElement.classList.contains("home");
+
 
 // for (let p of pages) {
 // 	let url = p.url;
@@ -55,12 +55,12 @@ const ARE_WE_HOME = document.documentElement.classList.contains("home");
 // TODO: Comment out the `for (let p of pages) {...}` loop you made in step 3.1 and uncomment the for loop below! I have helped you restructure the loop a bit in a way that may be confusing from the lab instructions
 
 for (let p of pages) {
-	let url = p.url;
+	let url = p.url.replace(/\/$/, ""); // Remove trailing slash
 	let title = p.title;
 
-    // Create correct relative link and add it to nav  
-    if (!ARE_WE_HOME && !url.startsWith("http")) {
-        url = "../" + url;
+    // Ensure homepage URL is `.` or `./`
+    if (url === "index.html") {
+        url = "./";
     }
 
     let a = document.createElement("a");
@@ -76,7 +76,8 @@ for (let p of pages) {
     }
 
     nav.append(a);
-} 
+}
+
 
 // STEP 4
 // step 4.1
