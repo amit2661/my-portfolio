@@ -24,10 +24,10 @@ function $$ (selector, context = document) {
 
 // step 3.1
 let pages = [
-	{url: "./my-portfolio/", title: "Home"},
-    {url: "/my-portfolio/projects", title: "Projects"},
-	{url: "/my-portfolio/Resume", title: "Resume"},
-    {url: "/my-portfolio/contact", title: "Contact"},
+	{url: "./", title: "Home"},
+    {url: "projects", title: "Projects"},
+	{url: "/Resume", title: "Resume"},
+    {url: "/contact", title: "Contact"},
     {url: "https://github.com/amit2661", title: "Github"}
     // TODO: add the rest of your pages here
 ];
