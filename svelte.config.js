@@ -11,7 +11,7 @@ const config = {
 			strict: false
 		}),
 		paths: {
-			base: "/YOUR_REPO_NAME", // 🔥 Replace with your actual GitHub repo name!
+			base: "/my-portfolio", // 🔥 Replace with your actual GitHub repo name!
 		},
 		appDir: "app",
 	}
