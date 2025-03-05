@@ -25,7 +25,7 @@ function $$ (selector, context = document) {
 // step 3.1
 let pages = [
 	{url: "./", title: "Home"},
-    {url: "/my-portfolio/projects", title: "Projects"},
+    {url: "./projects", title: "Projects"},
 	{url: "/my-portfolio/Resume", title: "Resume"},
     {url: "/my-portfolio/contact", title: "Contact"},
     {url: "https://github.com/amit2661", title: "Github"}
