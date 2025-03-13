@@ -37,6 +37,58 @@
     
         <!-- <img> (Image) tag is used to display images.-->
         <img src="images/IMG_6937.jpg" alt="Come with me!">
+
+        {#await fetch("https://api.github.com/users/amit2661")}
+    <p>Loading...</p>
+{:then response}
+    {#await response.json()}
+        <p>Decoding...</p>
+    {:then data}
+        <section>
+            <h2>My GitHub Stats</h2>
+            <dl class="github-stats">
+                <dt>Followers:</dt>
+                <dd>{data.followers}</dd>
+                <dt>Following:</dt>
+                <dd>{data.following}</dd>
+                <dt>Public Repositories:</dt>
+                <dd>{data.public_repos}</dd>
+                
+            </dl>
+        </section>
+    {:catch error}
+        <p class="error">Something went wrong: {error.message}</p>
+    {/await}
+{:catch error}
+    <p class="error">Something went wrong: {error.message}</p>
+{/await}
+
+<style>
+    .github-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+        gap: 10px;
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        max-width: 500px;
+        background: #f9f9f9;
+    }
+
+    .github-stats dt {
+        font-weight: bold;
+        grid-row: 1; /* Place all <dt> elements in the first row */
+    }
+
+    .github-stats dd {
+        grid-row: 2; /* Place all <dd> elements in the second row */
+        margin: 0;
+        font-size: 1.2em;
+        color: #333;
+    }
+</style>
+
     
             <!-- Example:
                 <img src="images/my_image.jpeg" alt="A description of the image">

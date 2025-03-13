@@ -84,16 +84,16 @@ function $$ (selector, context = document) {
 // TODO: Inside your styles.css file, adjust your navigation menu colors! There is nothing to do in this file in this step.
 
 // step 4.2
-document.body.insertAdjacentHTML("afterbegin", `
-	<label class="color-scheme">
-		Theme:
-		<select>
-			<option value="light dark">Auto</option>
-			<option value="light">Light</option>
-			<option value="dark">Dark</option>
-		</select>
-	</label>`
-);
+// document.body.insertAdjacentHTML("afterbegin", `
+// 	<label class="color-scheme">
+// 		Theme:
+// 		<select>
+// 			<option value="light dark">Auto</option>
+// 			<option value="light">Light</option>
+// 			<option value="dark">Dark</option>
+// 		</select>
+// 	</label>`
+// );
 
 
 // step 4.3
@@ -114,10 +114,10 @@ select.addEventListener("input", function (event) {
 
 // step 4.5 (continued)
 // Reminder: uncomment line inside the event listener for 4.5.1
-if ("colorScheme" in localStorage) {
-    document.documentElement.style.setProperty("color-scheme", localStorage.colorScheme);
-	select.value = localStorage.colorScheme;// TODO: set color scheme to the stored local value (hint: look at handout)
-}
+// if ("colorScheme" in localStorage) {
+//     document.documentElement.style.setProperty("color-scheme", localStorage.colorScheme);
+// 	select.value = localStorage.colorScheme;// TODO: set color scheme to the stored local value (hint: look at handout)
+// }
 
 // STEP 5 (OPTIONAL)
 // Note: This is an optional part of the lab! If you want to do it, uncomment the lines below and fill in the TODOs. Otherwise, leave the lines commented out.
