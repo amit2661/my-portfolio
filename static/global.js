@@ -23,17 +23,17 @@ function $$ (selector, context = document) {
 // TODO: Comment out the step 2 code in this file!
 
 // step 3.1
-let pages = [
-	{url: "./", title: "Home"},
-    {url: "./projects", title: "Projects"},
-	{url: "./Resume", title: "Resume"},
-    {url: "./contact", title: "Contact"},
-    {url: "https://github.com/amit2661", title: "Github"}
+// let pages = [
+// 	{url: "./", title: "Home"},
+//     {url: "./projects", title: "Projects"},
+// 	{url: "./Resume", title: "Resume"},
+//     {url: "./contact", title: "Contact"},
+//     {url: "https://github.com/amit2661", title: "Github"}
     // TODO: add the rest of your pages here
-];
+// ];
 
-let nav = document.createElement("nav");
-document.body.prepend(nav);
+// let nav = document.createElement("nav");
+// document.body.prepend(nav);
 
 // TODO: Inside index.html (our home page), add a class="home" attribute to the <html lang="en"> element!
 
@@ -54,29 +54,29 @@ document.body.prepend(nav);
 // step 3.2
 // TODO: Comment out the `for (let p of pages) {...}` loop you made in step 3.1 and uncomment the for loop below! I have helped you restructure the loop a bit in a way that may be confusing from the lab instructions
 
-for (let p of pages) {
-	let url = p.url.replace(/\/$/, ""); // Remove trailing slash
-	let title = p.title;
+// for (let p of pages) {
+// 	let url = p.url.replace(/\/$/, ""); // Remove trailing slash
+// 	let title = p.title;
 
-    // Ensure homepage URL is `.` or `./`
-    if (url === "index.html") {
-        url = "./";
-    }
+//     // Ensure homepage URL is `.` or `./`
+//     if (url === "index.html") {
+//         url = "./";
+//     }
 
-    let a = document.createElement("a");
-    a.href = url;
-    a.textContent = title;
+//     let a = document.createElement("a");
+//     a.href = url;
+//     a.textContent = title;
     
-    if (a.host === location.host && a.pathname === location.pathname) {
-        a.classList.add("current");
-    }
+//     if (a.host === location.host && a.pathname === location.pathname) {
+//         a.classList.add("current");
+//     }
 
-    if (a.host !== location.host) {
-        a.target = "_blank";
-    }
+//     if (a.host !== location.host) {
+//         a.target = "_blank";
+//     }
 
-    nav.append(a);
-}
+//     nav.append(a);
+// }
 
 
 // STEP 4
