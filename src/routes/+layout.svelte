@@ -3,13 +3,16 @@
   import { browser } from "$app/environment"; // ✅ Ensure we are in the browser
 
   let pages = [
-  { url: "/", title: "Home" },
+  { url: "./", title: "Home" },
   { url: "./projects", title: "Projects" },
   { url: "./contact", title: "Contact" },
   { url: "./Resume", title: "Resume" },
   { url: "./meta", title: "Meta" },
   { url: "https://github.com/amit2661", title: "Github" }
 ];
+
+// Function to normalize URLs by removing "./" for comparison
+const normalizeUrl = (url) => url.replace(/^\.\//, "/");
 
   // ✅ Ensure localStorage is available, otherwise use an empty object
   let localStorage = globalThis.localStorage ?? {};
@@ -42,7 +45,7 @@
   {#each pages as p}
   <a 
   href="{p.url}" 
-  class:current={$page.url.pathname === p.url}
+  class:current={normalizeUrl($page.url.pathname) === normalizeUrl(p.url)}
   target={p.url.startsWith("http") ? "_blank" : null}
 >
   {p.title}
