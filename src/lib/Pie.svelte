@@ -36,7 +36,10 @@ let arcs;
     {#each data as d, index}
         <li class:selected={selectedIndex === index}
         on:click={() => selectedIndex = selectedIndex === index ? -1 : index}>
-        <span class="swatch" style="background-color: {colors(index)}"></span>
+        <span 
+        class="swatch" 
+        style="background-color: {selectedIndex === index ? 'oklch(60% 45% 0)' : colors(index)}">
+    </span>
             {d.label} <em>({d.value})</em>
         </li>
     {/each}
@@ -109,7 +112,7 @@ svg:has(.selected) path:not(.selected) {
 	}
 	
 	&:is(li) {
-		color: var(--color);
+		color: var(--color); 
 	}
 }
 

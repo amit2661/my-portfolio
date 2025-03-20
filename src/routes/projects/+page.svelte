@@ -60,7 +60,7 @@
      
         <a href="https://github.com/amit2661" target="_blank">Github</a>
     </nav> -->
-    <Pie />
+    
 
     <div class="projects">
         {#each filteredByYear as p}
