@@ -3,13 +3,13 @@
   import { browser } from "$app/environment"; // ✅ Ensure we are in the browser
 
   let pages = [
-  { url: "./", title: "Home" },
-  { url: "./projects", title: "Projects" },
-  { url: "./contact", title: "Contact" },
-  { url: "./Resume", title: "Resume" },
-  { url: "./meta", title: "Meta" },
-  { url: "https://github.com/amit2661", title: "Github" }
-];
+    { url: "./", title: "Home" },
+    { url: "./projects", title: "Projects" },
+    { url: "./contact", title: "Contact" },
+    { url: "./Resume", title: "Resume" },
+    { url: "./meta", title: "Meta"},
+    { url: "https://github.com/amit2661", title: "Github" }
+  ];
 
 // Function to normalize URLs by removing "./" for comparison
 const normalizeUrl = (url) => url.replace(/^\.\//, "/");
@@ -44,10 +44,10 @@ const normalizeUrl = (url) => url.replace(/^\.\//, "/");
 <nav>
   {#each pages as p}
   <a 
-  href="{p.url}" 
-  class:current={normalizeUrl($page.url.pathname) === normalizeUrl(p.url)}
-  target={p.url.startsWith("http") ? "_blank" : null}
->
+      href={p.url} 
+      class:current={"." + $page.route.id === p.url} 
+      target={p.url.startsWith("http") ? "_blank" : null}
+    >
   {p.title}
 </a>
 
