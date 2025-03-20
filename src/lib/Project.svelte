@@ -1,15 +1,30 @@
 <script>
-    export let data = {};
-    // export let hLevel = 2;
+  export let data = {};
 </script>
 
 <article>
-    <h2>{data.title}</h2>
-    <img src="{data.image}" alt="" />
-    <p>
-        {data.description}
-    </p>
-  </article>
+  <h2>{data.title}</h2>
+  <img src="{data.image}" alt="" />
+  <div>
+      <p>{data.description}</p>
+      <p>Year:{data.year}</p>
+  </div>
+</article>
+
+<style>
+  div {
+      margin-top: 8px;
+  }
+
+  p {
+      margin: 4px 0;
+      font-family: Baskerville, "Palatino Linotype", "Book Antiqua", serif; /* Fallbacks */
+  }
+
+  .year {
+      font-variant-numeric: oldstyle-nums;
+  }
+</style>
 
   <!-- <style>
     article {

@@ -37,8 +37,7 @@
                 - Working on hydrodynamic optimization using deep learning.</li>
             <li><strong>Intern - Robotics & AI</strong> - Boston Dynamics (Summer 2023)<br>
                 - Worked on reinforcement learning models for robotic manipulation.</li>
-            <li><strong>Naval Propulsion Research Intern</strong> - Indian Navy (2022)<br>
-                - Designed electric propulsion systems for stealth submarines.</li>
+            
         </ul>
     </div>
 
