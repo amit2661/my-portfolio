@@ -273,12 +273,11 @@ dl.info dd {
 
 circle {
 	transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
 
 	&:hover {
 		transform: scale(1.5);
-
-transform-origin: center;
-transform-box: fill-box;
 
 	}
 }
