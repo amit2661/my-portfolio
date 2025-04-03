@@ -7,7 +7,7 @@
 	offset,
 } from '@floating-ui/dom';
   import Bar from '$lib/Bar.svelte';
-
+  import { base } from '$app/paths';
 
   let data = [];
   let commits = [];
@@ -38,7 +38,7 @@ $: hoveredCommit = commits[hoveredIndex] ?? hoveredCommit ?? {};
 
 
   onMount(async () => {
-    data = await d3.csv("/loc.csv", row => ({
+    data = await d3.csv(`${base}/loc.csv`, row => ({
       ...row,
       line: Number(row.line), 
       depth: Number(row.depth),
