@@ -1,33 +1,25 @@
 <script>
     import projects from "$lib/projects.json";
     import Project from "$lib/Project.svelte";
+    import { onMount } from "svelte";
+
+let githubData = null;
+let loading = true;
+let error = null;
+
+onMount(async () => {
+	try {
+		const response = await fetch("https://api.github.com/users/amit2661");
+		githubData = await response.json();
+	} catch (err) {
+		error = err;
+	}
+	loading = false;
+});
+    
 </script>
 
-<!-- Start of "body" section  -->
 
-    <!-- <nav> -->
-        <!-- Navigation link to the home page -->
-        <!-- <a href="index.html">Home</a> -->
-            <!--    
-                href="index.html" refers to the file that this link will open.
-                "Home" is the text that will be displayed as the clickable link.
-            -->
-
-        <!-- Complete the navigation as needed following the structure -->
-        <!-- <a href="projects/index.html">Projects</a> -->
-
-        <!-- <a href="Resume/index.html">Resume</a> -->
-        
-        <!-- <a href="contact/index.html">Contacts</a>       -->
-
-        <!-- <a href="https://github.com/amit2661" target="_blank">Github</a> -->
-            <!-- Navigation link to the ____ page (inside the "____" folder) -->
-        
-        <!-- NOTE: to link to external URLs you cna directly use the link at 'href'. Then, you can set target="_blank" to make it always open in a new tab.
-            For example:
-            <a href="https://www.google.com" target="_blank">Google</a>
-        -->
-    <!-- </nav>  -->
     
     <!-- <h1> (Heading 1) represents the main heading of a webpage or a section.-->
         <h1> Amit- Basics</h1>
@@ -38,35 +30,36 @@
         <!-- <img> (Image) tag is used to display images.-->
         <img src="images/IMG_6937.jpg" alt="Come with me!">
 
-        {#await fetch("https://api.github.com/users/amit2661")}
-    <p>Loading...</p>
-{:then response}
-    {#await response.json()}
-        <p>Decoding...</p>
-    {:then data}
+        
+        
+        {#if loading}
+        <p>Loading...</p>
+    {:else if error}
+        <p class="error">Something went wrong: {error.message}</p> 
+    {:else}
         <section>
+            
             <h2>My GitHub Stats</h2>
             <dl class="github-stats">
-                <dt>Followers:</dt>
-                <dd>{data.followers}</dd>
-                <dt>Following:</dt>
-                <dd>{data.following}</dd>
-                <dt>Public Repositories:</dt>
-                <dd>{data.public_repos}</dd>
-                
+                <dt>Followers</dt>
+                <dd>{githubData.followers}</dd>
+                <dt>Following</dt>
+                <dd>{githubData.following}</dd>
+                <dt>Public Repositories</dt>
+                <dd>{githubData.public_repos}</dd>
             </dl>
+       
         </section>
-    {:catch error}
-        <p class="error">Something went wrong: {error.message}</p>
-    {/await}
-{:catch error}
-    <p class="error">Something went wrong: {error.message}</p>
-{/await}
+    {/if}
+    
+    
+   
+    
 
 <style>
     .github-stats {
         display: grid;
-        grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+        grid-template-columns: repeat(3, 1fr); /* 4 equal columns */
         gap: 10px;
         text-align: center;
         padding: 10px;

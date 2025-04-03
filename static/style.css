@@ -186,6 +186,32 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0.5em 0; /* Consistent spacing */
 }
 
+ 
+.stats {
+    display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+        gap: 10px;
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        max-width: 500px;
+        background: #f9f9f9;
+}
+
+
+.stats dt {
+    font-weight: bold;
+    grid-row: 1; /* Place all <dt> elements in the first row */
+}
+
+ 
+.stats dd {
+    grid-row: 2; /* Place all <dd> elements in the second row */
+        margin: 0;
+        font-size: 1.2em;
+        color: #333;
+}
 
 
 /* STEP 5: Style your CV */
@@ -198,6 +224,7 @@ h1, h2, h3, h4, h5, h6 {
         max-width: 50rem;
         /* ... */ 
     }
+    
     
 
     
