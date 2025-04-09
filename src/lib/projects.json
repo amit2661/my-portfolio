@@ -16,8 +16,8 @@
       "description": "An interactive Mapbox + D3 project to explore BlueBikes traffic patterns in Boston and Cambridge. Includes time filtering, isochrone visualizations, and dynamic data rendering.",
       "year": "2025",
       "tech": ["Svelte", "Mapbox", "D3.js", "CSV", "GeoJSON"],
-      "image": "images/bikewatching.png"
-      
+      "image": "/images/bikewatching.png",
+      "url": "https://amit2661.github.io/bikewatching"
     },
     {
       "title": "Come on",
