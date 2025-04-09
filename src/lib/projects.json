@@ -12,10 +12,12 @@
       "description": "It's checking the housing prices."
     },
     {
-      "title": "Lets do it",
-      "year": "2022",
-      "image": "https://raw.githubusercontent.com/amit2661/A2/main/Capture%202.PNG",
-      "description": "Nike has sponsored the project."
+      "title": "Bikewatching",
+      "description": "An interactive Mapbox + D3 project to explore BlueBikes traffic patterns in Boston and Cambridge. Includes time filtering, isochrone visualizations, and dynamic data rendering.",
+      "year": "2025",
+      "tech": ["Svelte", "Mapbox", "D3.js", "CSV", "GeoJSON"],
+      "image": "images/bikewatching.png"
+      
     },
     {
       "title": "Come on",
