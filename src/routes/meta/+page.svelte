@@ -30,7 +30,14 @@
   let commitTooltip;
   let tooltipPosition = {x: 0, y: 0};
   let clickedCommits = [];
-
+  let commitProgress = 100;
+  let minDate, maxDate, maxDatePlusOne;
+let timeScale;
+let commitMaxTime;
+let filteredCommits = [];
+let filteredLines   = [];
+let filteredMinDate, filteredMaxDate;
+let xScale, yScale;
 
 
 $: hoveredCommit = commits[hoveredIndex] ?? hoveredCommit ?? {};
@@ -69,22 +76,51 @@ $: hoveredCommit = commits[hoveredIndex] ?? hoveredCommit ?? {};
       return ret;
     });
 
-    totalCommits = commits.length; // ✅ Total number of unique commits
-    totalFiles = new Set(data.map(d => d.file)).size; // ✅ Total unique files
+
+  });
+
+
+  $: if (commits.length > 0) {
+   // overall date bounds
+   minDate = d3.min(commits, d => d.date);
+  maxDate = d3.max(commits, d => d.date);
+   maxDatePlusOne = new Date(maxDate);
+   maxDatePlusOne.setDate(maxDatePlusOne.getDate() + 1);
+
+   // slider scale
+   timeScale = d3.scaleTime()
+     .domain([minDate, maxDatePlusOne])
+     .range([0, 100]);
+ }
+
+ // Convert the slider value (0-100) to a date.
+ $: if (timeScale) {
+   // map slider to a Date
+   commitMaxTime = timeScale.invert(commitProgress);
+
+   // filter once we know commitMaxTime
+   filteredCommits = commits.filter(c => c.datetime <= commitMaxTime);
+   filteredLines   = data   .filter(d => d.datetime   <= commitMaxTime);
+
+   // summary stats
+   totalCommits = filteredCommits.length;
+   totalFiles   = new Set(filteredLines.map(d => d.file)).size;
+ }
+
 
     console.log("Commits:", totalCommits);
     console.log("Files:", totalFiles);
-  });
+// Use filteredCommits dates if available, otherwise fall back to minDate/maxDate
+$: if (filteredCommits && filteredCommits.length > 0) {
+   const lo = d3.min(filteredCommits, d => d.date);
+   const hi = new Date(d3.max(filteredCommits, d => d.date).getTime() + 86400000);
 
-  $: minDate = d3.min(commits.map(d => d.date));
-  $: maxDate = d3.max(commits.map(d => d.date));
-  $: maxDatePlusOne = new Date(maxDate);
-  $: maxDatePlusOne.setDate(maxDatePlusOne.getDate() + 1);
+   xScale = d3.scaleTime()
+     .domain([lo, hi])
+     .range([usableArea.left, usableArea.right])
+     .nice();
+ }
 
-  $: xScale = d3.scaleTime()
-                .domain([minDate, maxDatePlusOne])
-                .range([usableArea.left, usableArea.right])
-                .nice();
 
   $: yScale = d3.scaleLinear()
                 .domain([24, 0])
@@ -138,6 +174,9 @@ $: selectedCounts = d3.rollup(
 );
 $: languageBreakdown = allTypes.map(type => [type, selectedCounts.get(type) || 0]);
 
+
+
+
 </script>
 
 <svelte:head>
@@ -157,10 +196,29 @@ $: languageBreakdown = allTypes.map(type => [type, selectedCounts.get(type) || 0
       <dd>{totalFiles}</dd> <!-- ✅ Updated -->
 
       <dt>Total <abbr title="Lines of Code">LOC</abbr></dt>
-      <dd>{data.length}</dd>
+      <dd>{filteredLines.length}</dd>
+
   </dl>
 </div>
 <h3>Commits by Time of the Day</h3>
+
+<div class="slider-container">
+  <div class="slider-row">
+    <label for="time-slider" class="slider-label">Show commits until:</label>
+    <time class="slider-time">
+      {commitMaxTime.toLocaleString("en", { dateStyle: "long", timeStyle: "short" })}
+    </time>
+  </div>
+  <input 
+    id="time-slider" 
+    type="range" 
+    min="0" 
+    max="100" 
+    bind:value={commitProgress} 
+    class="time-slider"
+  />
+</div>
+
 
 <svg viewBox="0 0 {width} {height}">
 
@@ -170,7 +228,8 @@ $: languageBreakdown = allTypes.map(type => [type, selectedCounts.get(type) || 0
   <g  transform="translate({usableArea.left}, 0)" bind:this={yAxis} />
   
   <g class="dots">
-    {#each commits as commit, index }
+    {#each filteredCommits as commit, index (commit.id)}
+
       <circle
         cx={ xScale(commit.datetime) }
         cy={ yScale(commit.hourFrac) }
@@ -287,4 +346,37 @@ circle {
     
 }
 
+
+  .slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Small gap between header row and the slider */
+    max-width: 100%;
+    margin-bottom: 1em;
+  }
+
+  .slider-row {
+    display: flex;
+    justify-content: space-between; /* Pushes the label left and the time right */
+    align-items: center;
+  }
+
+  .slider-label {
+    white-space: nowrap; /* Keeps the label in a single line */
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .slider-time {
+    font-weight: bold; /* Bold text */
+    font-size: 16px;
+    text-align: right; /* Right aligns the text within its container */
+  }
+
+  .time-slider {
+    width: 100%; /* Ensure the slider takes full available width */
+  }
+
 </style>
+
+
