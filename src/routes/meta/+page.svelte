@@ -93,7 +93,7 @@
   // set xScale
   $: xScale = d3
     .scaleTime()
-    .domain(d3.extent(filteredCommits.map((d) => d.date)))
+    .domain([minDate, maxDatePlusOne])
     .range([usableArea.left, usableArea.right])
     .nice();
 

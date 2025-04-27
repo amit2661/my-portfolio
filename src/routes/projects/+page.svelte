@@ -46,8 +46,15 @@
 <p>Selected Year: {selectedYear ? selectedYear : "None"}</p>
 
 <br>
-<input type="search" bind:value={query}
-       aria-label="Search projects" placeholder="🔍 Search projects…" />
+<div class="search-wrapper">
+  <span aria-hidden="true" class="emoji">🔍</span>
+  <input 
+    type="search" 
+    bind:value={query}
+    aria-label="Search projects"
+    placeholder="Search projects…" />
+</div>
+
 <br>
     <!-- <nav>
         <a href="../index.html">Home</a>
@@ -75,10 +82,25 @@
     <style>
       input[type="search"] {
           width: 100%;
-          padding: 0.5em;
+          height: 1rem;
+          padding: 2rem;
           font-size: 1em;
           border: 1px solid #ccc;
           border-radius: 4px;
       }
+
+      .search-wrapper {
+  position: relative;
+}
+
+.emoji {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 1rem;
+}
+
   </style>
   
